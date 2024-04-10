@@ -21,7 +21,7 @@ import (
 	"chainmaker.org/chainmaker/net-common/common/priorityblocker"
 	"chainmaker.org/chainmaker/net-common/utils"
 	//"chainmaker.org/chainmaker/net-libp2p/datapackage"
-	"satnet-libp2p/datapackage"
+	"github.com/Sanjin-Lai/satnet-libp2p/datapackage"
 
 	api "chainmaker.org/chainmaker/protocol/v2"
 	pool "github.com/libp2p/go-buffer-pool"
