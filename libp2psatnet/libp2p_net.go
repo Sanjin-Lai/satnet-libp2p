@@ -141,7 +141,7 @@ func NewLibP2pNet(log api.Logger) (*LibP2pNet, error) {
 		alarmBell: newBell(sendDefaultTime, sendDefaultSize),
 		//bytesPool: pool.NewByteSlicesPool(8),
 	}
-	go net.alarmBell.start(ctx)
+	//go net.alarmBell.start(ctx)
 	return net, nil
 }
 

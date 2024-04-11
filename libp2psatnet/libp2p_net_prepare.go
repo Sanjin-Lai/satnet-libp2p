@@ -7,7 +7,6 @@ SPDX-License-Identifier: Apache-2.0
 package libp2psatnet
 
 import (
-	"chainmaker.org/chainmaker/common/v2/crypto/engine"
 	"chainmaker.org/chainmaker/net-common/common/priorityblocker"
 	"strconv"
 	"strings"
@@ -175,9 +174,6 @@ func (ln *LibP2pNet) prepareBlackList() error {
 // createLibp2pOptions create all necessary options for libp2p.
 func (ln *LibP2pNet) createLibp2pOptions() ([]libp2p.Option, error) {
 	ln.log.Info("[Net] creating options...")
-
-	//use default crypto engine, TODO optimize
-	engine.InitCryptoEngine("tjfoc", true)
 
 	privKey, err := ln.prepareKey()
 	if err != nil {
