@@ -8,6 +8,7 @@ package libp2psatnet
 
 import (
 	"fmt"
+	"os/exec"
 	"sync"
 	"time"
 
@@ -98,6 +99,7 @@ func (cs *ConnSupervisor) startSupervising(readySignal chan struct{}) {
 		case <-readySignal:
 		case <-timer.C:
 		}
+		isNetworkConnected()
 		for cs.getSignal() {
 			//if cs.host.connManager.ConnCount() < len(cs.getPeerAddrInfos()) {
 			cs.try()
@@ -106,6 +108,22 @@ func (cs *ConnSupervisor) startSupervising(readySignal chan struct{}) {
 		}
 		cs.startUp = false
 	}()
+}
+
+func isNetworkConnected() {
+	// 192.168.0.1 consensus_node0的IP地址，测试网络是否连通
+	cmd := exec.Command("ping", "-w 5", "192.168.0.1", "-c 1")
+	ticker := time.NewTicker(5 * time.Second)
+	defer ticker.Stop()
+	for {
+		select {
+		case <-ticker.C:
+			if _, err := cmd.Output(); err == nil {
+				fmt.Println("Network Connected!")
+				return
+			}
+		}
+	}
 }
 
 func (cs *ConnSupervisor) try() {
