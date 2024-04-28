@@ -7,6 +7,7 @@ SPDX-License-Identifier: Apache-2.0
 package libp2psatnet
 
 import (
+	"fmt"
 	"sync"
 	"time"
 
@@ -119,6 +120,7 @@ func (cs *ConnSupervisor) try() {
 				connectedCount++
 				if connectedCount == count && !cs.allConnected {
 					cs.log.Infof("[ConnSupervisor] all necessary peers connected.")
+					fmt.Println("All necessary peers connected!")
 					cs.allConnected = true
 				}
 				_, ok := cs.actuators[peerInfo.ID]

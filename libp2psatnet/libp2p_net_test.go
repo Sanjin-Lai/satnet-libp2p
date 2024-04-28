@@ -18,8 +18,8 @@ func TestSatNetConn(t *testing.T) {
 		node01Addr = "/ip4/127.0.0.1/tcp/11301"
 		node02Addr = "/ip4/127.0.0.1/tcp/11302"
 
-		privKey01 = "../testdata/private01.key"
-		privKey02 = "../testdata/private02.key"
+		privKey01 = "../../module/net/testdata/private01.key"
+		privKey02 = "../../module/net/testdata/private02.key"
 	)
 
 	// new logger
@@ -33,6 +33,8 @@ func TestSatNetConn(t *testing.T) {
 		WithReadySignalC(node01ReadySignalC),
 		WithListenAddr(node01Addr),
 		WithPrivKeyCrypto(privKey01),
+		WithSeeds("/ip4/127.0.0.1/tcp/11301/p2p/QmZDa26voXoQMtbgHhCVWwVkAerRDUu6bLTLrFLW3DcvKP",
+			"/ip4/127.0.0.1/tcp/11302/p2p/QmWstoLLHCQWjSt1dQVyNJ2otVGD4Rg1wsEyEAigzr9ifg"),
 	)
 	if err != nil {
 		log.Fatalln(err)
@@ -57,7 +59,8 @@ func TestSatNetConn(t *testing.T) {
 		WithReadySignalC(node02ReadySignalC),
 		WithListenAddr(node02Addr),
 		WithPrivKeyCrypto(privKey02),
-		WithSeeds(node01FullAddr),
+		WithSeeds(node01FullAddr,
+			"/ip4/127.0.0.1/tcp/11302/p2p/QmWstoLLHCQWjSt1dQVyNJ2otVGD4Rg1wsEyEAigzr9ifg"),
 	)
 	log.Println("=>node02 start")
 	err = node02.Start()
@@ -69,6 +72,8 @@ func TestSatNetConn(t *testing.T) {
 	log.Printf("node02 [%v] start\n", node02FullAddr)
 
 	close(node02ReadySignalC)
+
+	time.Sleep(time.Second * 100)
 
 	// msg handler, used to process incoming topic information
 	// the essence is a stream handler

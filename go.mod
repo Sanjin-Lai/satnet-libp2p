@@ -5,7 +5,7 @@ go 1.15
 
 require (
 	chainmaker.org/chainmaker/common/v2 v2.3.2
-	chainmaker.org/chainmaker/libp2p-pubsub v1.3.1
+	chainmaker.org/chainmaker/libp2p-pubsub v1.1.3
 	chainmaker.org/chainmaker/logger/v2 v2.3.0
 	chainmaker.org/chainmaker/net-common v1.3.1
 	chainmaker.org/chainmaker/protocol/v2 v2.3.3

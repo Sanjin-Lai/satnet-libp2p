@@ -241,15 +241,16 @@ func (lh *LibP2pHost) Start() error {
 		lh.log.Warn("[Host] host is running. ignored.")
 		return nil
 	}
-	lh.log.Info("[Host] stating host...")
+	lh.log.Info("[Host] starting host...")
 	node, err := libp2p.New(lh.ctx, lh.opts...)
 	if err != nil {
 		return err
 	}
 	lh.host = node
 	// network notify
+
 	node.Network().Notify(networkNotify(lh))
-	lh.log.Info("[Host] host stated.")
+	lh.log.Info("[Host] host started.")
 	for _, addr := range node.Addrs() {
 		lh.log.Infof("[Host] host listening on address:%s/p2p/%s", addr.String(), node.ID().Pretty())
 	}
